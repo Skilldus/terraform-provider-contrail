@@ -26,12 +26,12 @@ Also tested with terraform 0.12.6 , it works fine.
 Building The Provider
 ---------------------
 
-Clone repository to: `$GOPATH/src/github.com/PetrusHahol/terraform-provider-contrail`
+Clone repository to: `$GOPATH/src/github.com/Skilldus/terraform-provider-contrail`
 
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-contrail
+$ cd $GOPATH/src/github.com/Skilldus/terraform-provider-contrail
 $ make build
 ```
 

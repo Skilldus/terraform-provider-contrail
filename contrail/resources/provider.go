@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/Juniper/contrail-go-api"
-	"github.com/hashicorp/terraform/helper/mutexkv"
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/mutexkv"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 
 	"log"
 )

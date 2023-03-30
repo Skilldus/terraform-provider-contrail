@@ -12,7 +12,7 @@ import (
 
 	"github.com/Juniper/contrail-go-api"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 var _ = spew.Dump // Avoid import errors if not used
