@@ -3,7 +3,7 @@ package resources
 import (
 	"fmt"
 
-	"github.com/Juniper/contrail-go-api"
+	"github.com/Skilldus/contrail-go-api"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/mutexkv"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 
@@ -17,48 +17,56 @@ func Provider() *schema.Provider {
 	log.Printf("Resources map (for custom Contrail provider): %+v", ContrailResourcesMap)
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
-			"server": &schema.Schema{
+			"server": {
 				Type:        schema.TypeString,
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("CONTRAIL_API_SERVER", nil),
 				Description: descriptions["server"],
 			},
-			"port": &schema.Schema{
+			"port": {
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Default:     8082,
 				Description: descriptions["port"],
 			},
-			"username": &schema.Schema{
+			"username": {
 				Type:        schema.TypeString,
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("OS_USERNAME", ""),
 				Description: descriptions["username"],
 			},
-			"tenant_name": &schema.Schema{
+			"tenant_name": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.MultiEnvDefaultFunc([]string{"OS_TENANT_NAME", "OS_PROJECT_NAME"}, ""),
 				Description: descriptions["tenant_name"],
 			},
-			"password": &schema.Schema{
+			"password": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Sensitive:   true,
 				DefaultFunc: schema.EnvDefaultFunc("OS_PASSWORD", ""),
 				Description: descriptions["password"],
 			},
-			"token": &schema.Schema{
+			"token": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.MultiEnvDefaultFunc([]string{"OS_AUTH_TOKEN", "OS_TOKEN"}, ""),
 				Description: descriptions["token"],
 			},
-			"auth_url": &schema.Schema{
+			"auth_url": {
 				Type:        schema.TypeString,
 				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("OS_AUTH_URL", nil),
 				Description: descriptions["auth_url"],
+			},
+			"domain_name": {
+				Type:     schema.TypeString,
+				Required: true,
+				// Optional:    true,
+				Default:     "default",
+				DefaultFunc: schema.EnvDefaultFunc("OS_DOMAIN_NAME", nil),
+				Description: descriptions["domain_name"],
 			},
 		},
 		ResourcesMap:  ContrailResourcesMap,
@@ -77,19 +85,21 @@ func init() {
 		"password":    "Password to login with.",
 		"token":       "Authentication token to use as an alternative to username/password.",
 		"auth_url":    "The Identity authentication URL.",
+		"domain_name": "The name of the domain to login with.",
 	}
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	client := contrail.NewClient(d.Get("server").(string), d.Get("port").(int))
 	log.Printf("Configuring Contrail client: %v:%v", client.GetServer(), d.Get("port").(int))
-	if authURLRaw, isok := d.GetOk("auth_url"); isok == true {
+	if authURLRaw, isok := d.GetOk("auth_url"); isok {
 		authURL := authURLRaw.(string)
 		tenant := d.Get("tenant_name").(string)
 		username := d.Get("username").(string)
 		password := d.Get("password").(string)
 		token := d.Get("token").(string)
-		keyst := contrail.NewKeystoneClient(authURL, tenant, username, password, token)
+		domain_name := d.Get("domain_name").(string)
+		keyst := contrail.NewKeystoneClient(authURL, tenant, username, password, token, domain_name)
 		if err := keyst.Authenticate(); err != nil {
 			return nil, fmt.Errorf("Authentication error: %v", err)
 		}
