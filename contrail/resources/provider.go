@@ -61,12 +61,22 @@ func Provider() *schema.Provider {
 				Description: descriptions["auth_url"],
 			},
 			"domain_name": {
-				Type:     schema.TypeString,
-				Required: true,
-				// Optional:    true,
-				Default:     "default",
+				Type:        schema.TypeString,
+				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("OS_DOMAIN_NAME", nil),
 				Description: descriptions["domain_name"],
+			},
+			"project_name": {
+				Type:        schema.TypeString,
+				Required:    true,
+				DefaultFunc: schema.EnvDefaultFunc("OS_PROJECT_NAME", nil),
+				Description: descriptions["project_name"],
+			},
+			"project_domain_name": {
+				Type:        schema.TypeString,
+				Required:    true,
+				DefaultFunc: schema.EnvDefaultFunc("OS_PROJECT_DOMAIN_NAME", nil),
+				Description: descriptions["project_domain_name"],
 			},
 		},
 		ResourcesMap:  ContrailResourcesMap,
@@ -78,14 +88,16 @@ var descriptions map[string]string
 
 func init() {
 	descriptions = map[string]string{
-		"server":      "Contrail API server IP address.",
-		"port":        "Contrail API server port number (default 8082).",
-		"username":    "Username to login with.",
-		"tenant_name": "The name of the Tenant or Project to login with.",
-		"password":    "Password to login with.",
-		"token":       "Authentication token to use as an alternative to username/password.",
-		"auth_url":    "The Identity authentication URL.",
-		"domain_name": "The name of the domain to login with.",
+		"server":              "Contrail API server IP address.",
+		"port":                "Contrail API server port number (default 8082).",
+		"username":            "Username to login with.",
+		"tenant_name":         "The name of the Tenant or Project to login with.",
+		"password":            "Password to login with.",
+		"token":               "Authentication token to use as an alternative to username/password.",
+		"auth_url":            "The Identity authentication URL.",
+		"domain_name":         "The name of the domain to login with.",
+		"project_name":        "The name of the project.",
+		"project_domain_name": "The name of the project domain to login with.",
 	}
 }
 
@@ -99,8 +111,10 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 		password := d.Get("password").(string)
 		token := d.Get("token").(string)
 		domain_name := d.Get("domain_name").(string)
-		keyst := contrail.NewKeystoneClient(authURL, tenant, username, password, token, domain_name)
-		if err := keyst.Authenticate(); err != nil {
+		project_name := d.Get("project_name").(string)
+		project_domain_name := d.Get("project_domain_name").(string)
+		keyst := contrail.NewKeystoneClient(authURL, tenant, username, password, token, domain_name, project_name, project_domain_name)
+		if err := keyst.AuthenticateV3(); err != nil {
 			return nil, fmt.Errorf("Authentication error: %v", err)
 		}
 		client.SetAuthenticator(keyst)

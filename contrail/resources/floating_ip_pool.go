@@ -10,7 +10,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/Juniper/contrail-go-api"
+	"github.com/Skilldus/contrail-go-api"
 	"github.com/davecgh/go-spew/spew"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )

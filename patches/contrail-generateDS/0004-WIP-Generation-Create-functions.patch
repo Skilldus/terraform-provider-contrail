@@ -18,7 +18,7 @@ index 03d7712..8e7e8aa 100644
          "encoding/json"
 +        "math/big"
  
-         "github.com/Juniper/contrail-go-api"
+         "github.com/Skilldus/contrail-go-api"
  )
 @@ -224,7 +225,7 @@ func (obj *%(typecamel)s) Add%(fieldcamel)s(value %(ptr)s%(fieldtype)s) {
          for field in fields:

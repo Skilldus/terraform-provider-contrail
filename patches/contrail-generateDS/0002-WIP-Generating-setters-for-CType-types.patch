@@ -62,7 +62,7 @@ index 6aef342..ddef7cc 100644
 +        "fmt"
 +
          "github.com/hashicorp/terraform/helper/schema"
-         "github.com/Juniper/contrail-go-api"
+         "github.com/Skilldus/contrail-go-api"
  )
  
 -""" % (sys._getframe().f_code.co_name)
@@ -102,7 +102,7 @@ index 6aef342..ddef7cc 100644
  import (
 -        //"encoding/json"
          "github.com/hashicorp/terraform/helper/schema"
-         "github.com/Juniper/contrail-go-api"
+         "github.com/Skilldus/contrail-go-api"
 +
 +        //"fmt"
  )

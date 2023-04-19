@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"github.com/Juniper/contrail-go-api"
+	"github.com/Skilldus/contrail-go-api"
 )
 
 const (

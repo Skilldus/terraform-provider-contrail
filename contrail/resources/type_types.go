@@ -3,7 +3,7 @@ package resources
 import (
 	"reflect"
 
-	"github.com/Juniper/contrail-go-api"
+	"github.com/Skilldus/contrail-go-api"
 )
 
 var (

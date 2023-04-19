@@ -18,9 +18,9 @@ index ddef7cc..ddea06c 100644
 +        "strings"
  
          "github.com/hashicorp/terraform/helper/schema"
-         "github.com/Juniper/contrail-go-api"
+         "github.com/Skilldus/contrail-go-api"
 @@ -132,6 +133,7 @@ import (
-         "github.com/Juniper/contrail-go-api"
+         "github.com/Skilldus/contrail-go-api"
  
          //"fmt"
 +        "strings"

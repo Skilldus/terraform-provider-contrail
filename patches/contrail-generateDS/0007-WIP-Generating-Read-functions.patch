@@ -47,7 +47,7 @@ index 37e82a0..f3426c7 100644
  package resources
  
  import (
--    //"github.com/Juniper/contrail-go-api"
+-    //"github.com/Skilldus/contrail-go-api"
      "github.com/hashicorp/terraform/helper/schema"
  )
  
@@ -79,7 +79,7 @@ index 37e82a0..f3426c7 100644
 @@ -107,6 +122,7 @@ import (
  
          "github.com/hashicorp/terraform/helper/schema"
-         "github.com/Juniper/contrail-go-api"
+         "github.com/Skilldus/contrail-go-api"
 +        "github.com/davecgh/go-spew/spew"
  )
  
