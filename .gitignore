@@ -1,3 +1,5 @@
 .terraform/
 crash.log
 terraform-provider-contrail
+go.mod
+go.sum
