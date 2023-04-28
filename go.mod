@@ -87,4 +87,4 @@ require (
 	google.golang.org/protobuf v1.25.0 // indirect
 )
 
-replace github.com/Skilldus/contrail-go-api v0.0.0-20230417080107-302a9df9fea1 => ../contrail-go-api
+//replace github.com/Skilldus/contrail-go-api v0.0.0-20230417080107-302a9df9fea1 => ../contrail-go-api
