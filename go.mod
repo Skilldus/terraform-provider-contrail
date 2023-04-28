@@ -3,7 +3,6 @@ module github.com/Skilldus/terraform-provider-contrail
 go 1.19
 
 require (
-	github.com/Skilldus/contrail-go-api v0.0.0-20230417080107-302a9df9fea1
 	github.com/davecgh/go-spew v1.1.1
 	github.com/hashicorp/terraform-plugin-sdk v1.17.2
 )
@@ -14,6 +13,7 @@ require (
 	github.com/Masterminds/goutils v1.1.0 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/Masterminds/sprig v2.22.0+incompatible // indirect
+	github.com/Skilldus/contrail-go-api v0.0.0-20230419131121-d54cad6df2c9 // indirect
 	github.com/agext/levenshtein v1.2.2 // indirect
 	github.com/apparentlymart/go-cidr v1.1.0 // indirect
 	github.com/apparentlymart/go-textseg/v12 v12.0.0 // indirect
